@@ -29,133 +29,302 @@
     }
   }
   </script>
+  <link rel="preconnect" href="https://images.unsplash.com">
   <link href="/style.css" rel="stylesheet">
 </head>
 <body>
 
-  <!-- Social Proof -->
-  <div class="social-count" id="socialCount">
-    이 글을 <strong id="viewCount">12,847</strong>명이 읽었습니다
+  <!-- Skeleton Loader -->
+  <div class="skeleton-screen" id="skeleton">
+    <div class="skeleton-bar"></div>
+    <div class="skeleton-hero-block"></div>
+    <div class="skeleton-line w80"></div>
+    <div class="skeleton-line w60"></div>
+    <div class="skeleton-line w90"></div>
+    <div class="skeleton-line w70"></div>
   </div>
 
-  <!-- Hero -->
-  <header class="hero">
-    <h1>일산룸 — 예약 전에 반드시 읽어야 할 글</h1>
-    <p class="hero-sub">검색 그만해라. 이 글 하나면 끝난다.</p>
-  </header>
+  <!-- Main Content (hidden until loaded) -->
+  <div class="page-wrap" id="pageWrap">
 
-  <main class="content">
-
-    <!-- Section 1: 솔직한 현실 -->
-    <section class="article-section">
-      <h2>일산룸, 솔직히 아무 데나 가면 후회한다</h2>
-      <p>일산에서 룸을 찾는 사람 열 명 중 여덟 명은 블로그 후기만 보고 간다. 문제는 그 후기 대부분이 광고라는 거다. 직접 발로 뛰어본 사람 입장에서 말하면, 일산룸은 장소마다 분위기 차이가 심하다. 같은 일산 지역이라도 정발산역 근처와 마두역 근처는 완전히 다른 세계다. 정발산 쪽은 비교적 깔끔하고 신식 인테리어가 많은 반면, 마두 쪽은 오래된 곳이 많아서 호불호가 갈린다. 웨스턴돔 상권 주변으로 밀집된 일산룸은 접근성이 좋지만 주말 저녁에는 대기가 길어지는 단점이 있다.</p>
-      <p>일산룸을 제대로 고르려면 세 가지를 반드시 확인해야 한다. 첫째, 룸 크기다. 4인 기준으로 예약했는데 2인용 크기 룸에 밀어넣는 곳이 생각보다 많다. 둘째, 음향 시스템이다. 마이크 울림이 심한 곳은 노래 부르다가 귀가 아프다. 셋째, 환기 상태다. 지하에 있는 일산룸 중에는 환기가 안 되어서 30분만 있어도 머리가 아픈 곳이 있다. 이 세 가지만 체크해도 최소한 "여기 왜 왔지" 하는 후회는 피할 수 있다.</p>
-    </section>
-
-    <!-- Pull Quote -->
-    <blockquote class="pull-quote">
-      "일산룸은 한 번 잘못 고르면 그날 저녁이 통째로 날아간다"
-    </blockquote>
-
-    <!-- Section 2: 지역별 특징 -->
-    <section class="article-section">
-      <h2>일산 지역별 룸 특징 — 정발산 vs 마두 vs 백석</h2>
-      <p>정발산역 일대는 일산에서 가장 활발한 상권이다. 라페스타와 웨스턴돔을 중심으로 일산룸이 밀집해 있고, 대부분 2018년 이후에 리모델링을 거쳤다. 인테리어가 깔끔하고 음향 장비가 최신이라 처음 방문하는 사람에게 무난하다. 다만 주말 밤 10시 이후에는 예약 없이 가면 자리가 없는 경우가 많다.</p>
-      <p>마두역 쪽은 상대적으로 오래된 업소가 많지만, 그만큼 단골 위주로 운영되는 곳이 있다. 단골이 많다는 건 서비스가 검증됐다는 뜻이기도 하다. 일산룸 중에서 분위기를 중시하는 사람이라면 마두 쪽 숨은 명소를 찾아보는 것도 방법이다. 백석역 근처는 최근 신규 오픈한 곳이 늘어나면서 경쟁이 치열해졌다. 신규 업소일수록 초기 고객을 잡기 위해 시설에 투자를 많이 한 상태라 시설 대비 만족도가 높은 편이다.</p>
-    </section>
-
-    <!-- CTA 1 (40% position) -->
-    <div class="cta-box">
-      <a href="https://nolcool.com" class="cta-button" target="_blank" rel="noopener">
-        놀쿨에서 일산룸 더 보기 →
-      </a>
+    <!-- Social Proof -->
+    <div class="social-count" id="socialCount">
+      이 글을 <strong id="viewCount">12,847</strong>명이 읽었습니다
     </div>
 
-    <!-- Section 3: 체크리스트 -->
-    <section class="article-section">
-      <h2>일산룸 고를 때 반드시 확인할 5가지</h2>
-      <div class="checklist">
-        <div class="check-item">
-          <span class="check-num">01</span>
-          <div>
-            <h3>룸 크기와 인원 수 매칭</h3>
-            <p>4인이 갈 건데 6인실을 잡으면 썰렁하고, 2인실에 4명이 들어가면 숨이 막힌다. 일산룸 예약할 때 인원수를 정확히 말하고, 룸 크기를 사진으로 미리 확인하는 게 기본이다. 전화로 "몇 평이에요?"라고 물어보면 대략 감이 온다.</p>
-          </div>
-        </div>
-        <div class="check-item">
-          <span class="check-num">02</span>
-          <div>
-            <h3>음향 장비 상태</h3>
-            <p>마이크가 지직거리거나 스피커에서 잡음이 나면 분위기가 순식간에 깨진다. 최근 리모델링한 일산룸은 대부분 금영 최신 기기를 쓰고 있지만, 오래된 곳은 TJ 구형 기기를 아직 쓰는 경우가 있다. 신곡 업데이트가 안 된 기기는 최신 곡을 부를 수 없으니 미리 확인하자.</p>
-          </div>
-        </div>
-        <div class="check-item">
-          <span class="check-num">03</span>
-          <div>
-            <h3>환기 시스템</h3>
-            <p>지하 매장이 많은 일산 특성상 환기가 안 되는 곳이 꽤 있다. 30분만 있어도 공기가 탁해지면 머리가 아프고 목이 쉰다. 방문 전에 "환기 잘 되나요?"라고 한마디만 물어봐도 지뢰를 피할 수 있다.</p>
-          </div>
-        </div>
-        <div class="check-item">
-          <span class="check-num">04</span>
-          <div>
-            <h3>주차 여부</h3>
-            <p>일산은 차 없이 다니기 어려운 동네다. 정발산역 근처는 그나마 대중교통이 되지만, 마두나 백석은 차가 필수다. 건물 자체 주차장이 있는지, 근처 공영 주차장은 어딘지 미리 파악해두면 당일 헤매지 않는다.</p>
-          </div>
-        </div>
-        <div class="check-item">
-          <span class="check-num">05</span>
-          <div>
-            <h3>예약 시간대</h3>
-            <p>일산룸은 금요일 밤 9시~11시가 피크타임이다. 이 시간대에 워크인으로 가면 좋은 룸은 이미 다 찼다. 평일 저녁이나 토요일 오후 일찍 가면 여유롭게 원하는 룸을 고를 수 있다. 미리 예약하면 피크타임에도 원하는 룸을 잡을 수 있다.</p>
-          </div>
-        </div>
+    <!-- Hero with dark overlay -->
+    <header class="hero" role="banner">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <h1>일산룸 — 예약 전에 반드시 읽어야 할 글</h1>
+        <p class="hero-sub">검색 그만해라. 이 글 하나면 끝난다.</p>
       </div>
-    </section>
+    </header>
 
-    <!-- Pull Quote 2 -->
-    <blockquote class="pull-quote">
-      "좋은 일산룸은 검색이 아니라 경험에서 나온다"
-    </blockquote>
+    <main class="content">
 
-    <!-- Section 4: 시간대별 -->
-    <section class="article-section">
-      <h2>시간대별 일산룸 분위기 변화</h2>
-      <p>같은 일산룸이라도 시간대에 따라 분위기가 완전히 달라진다. 오후 6시~8시는 비교적 조용한 시간이다. 직장인들이 퇴근 후 가볍게 한두 시간 즐기는 시간대라 분위기가 차분하다. 이 시간에 가면 대기 없이 바로 들어갈 수 있고, 직원 응대도 여유롭다.</p>
-      <p>밤 9시가 넘으면 상황이 바뀐다. 2차로 넘어오는 손님들이 몰리면서 복도부터 시끄러워진다. 인기 있는 일산룸은 이 시간대에 만석이 되고, 빈 룸이 나올 때까지 로비에서 기다려야 하는 경우도 생긴다. 자정 이후에는 분위기가 또 달라지는데, 남아 있는 손님들은 대부분 장시간 이용자라 좀 더 자유로운 분위기가 된다.</p>
-      <p>주말과 평일의 차이도 크다. 금요일 밤은 일산룸 전체가 전쟁터라고 봐야 하고, 일요일 저녁은 의외로 한산하다. 일요일 저녁에 일산룸을 이용하면 여유롭게 3~4시간 즐길 수 있다는 게 경험자들 사이에서는 이미 알려진 팁이다.</p>
-    </section>
+      <!-- Section 1 -->
+      <section class="article-section">
+        <h2>일산룸, 솔직히 아무 데나 가면 후회한다</h2>
+        <p>일산에서 룸을 찾는 사람 열 명 중 여덟 명은 블로그 후기만 보고 간다. 문제는 그 후기 대부분이 광고라는 거다. 직접 발로 뛰어본 사람 입장에서 말하면, 일산룸은 장소마다 분위기 차이가 심하다. 같은 일산 지역이라도 정발산역 근처와 마두역 근처는 완전히 다른 세계다. 정발산 쪽은 비교적 깔끔하고 신식 인테리어가 많은 반면, 마두 쪽은 오래된 곳이 많아서 호불호가 갈린다. 웨스턴돔 상권 주변으로 밀집된 일산룸은 접근성이 좋지만 주말 저녁에는 대기가 길어지는 단점이 있다.</p>
 
-    <!-- Section 5: 실수 모음 -->
-    <section class="article-section">
-      <h2>일산룸 처음 가는 사람이 하는 실수 TOP3</h2>
-      <p><strong>실수 1: 후기만 보고 간다.</strong> 블로그 후기 중 상당수는 업소 측에서 의뢰한 협찬 리뷰다. "분위기 최고" "강추" 같은 뜬구름 잡는 후기보다, 구체적으로 룸 크기나 음향 상태를 언급한 후기가 신뢰할 만하다. 일산룸 후기를 볼 때는 사진 속 룸 크기와 인테리어 상태를 유심히 보는 게 핵심이다.</p>
-      <p><strong>실수 2: 예약 없이 간다.</strong> 특히 금~토 저녁에 예약 없이 일산룸에 가면 30분~1시간 대기는 기본이다. 전화 한 통이면 끝나는 일을 귀찮아서 안 하면 그날 저녁 전체가 꼬인다.</p>
-      <p><strong>실수 3: 위치 확인을 안 한다.</strong> 네이버 지도에 나온 위치와 실제 입구가 다른 경우가 의외로 많다. 지하에 있는 일산룸은 건물 정면이 아니라 측면이나 후면으로 들어가야 하는 경우가 있어서, 미리 입구 위치를 물어보는 게 좋다.</p>
-    </section>
+        <!-- Image 1 -->
+        <figure class="article-photo">
+          <img src="https://images.unsplash.com/photo-1566417713940-fe7c737a9ef2?w=720&q=80&fm=webp" alt="일산룸 내부 분위기 — 어두운 조명 아래 고급스러운 룸 인테리어" loading="lazy" width="720" height="480">
+          <figcaption>일산 정발산역 근처 신축 룸 내부 — 조명과 인테리어가 분위기를 좌우한다</figcaption>
+        </figure>
 
-    <!-- CTA 2 (Bottom) -->
-    <div class="cta-box">
-      <a href="https://nolcool.com" class="cta-button" target="_blank" rel="noopener">
-        놀쿨에서 일산룸 더 보기 →
-      </a>
-    </div>
+        <p>일산룸을 제대로 고르려면 세 가지를 반드시 확인해야 한다. 첫째, 룸 크기다. 4인 기준으로 예약했는데 2인용 크기 룸에 밀어넣는 곳이 생각보다 많다. 둘째, 음향 시스템이다. 마이크 울림이 심한 곳은 노래 부르다가 귀가 아프다. 셋째, 환기 상태다. 지하에 있는 일산룸 중에는 환기가 안 되어서 30분만 있어도 머리가 아픈 곳이 있다. 이 세 가지만 체크해도 최소한 "여기 왜 왔지" 하는 후회는 피할 수 있다.</p>
+      </section>
 
-    <!-- Section 6: 마무리 -->
-    <section class="article-section">
-      <h2>결론 — 일산룸 선택 기준은 단순하다</h2>
-      <p>일산룸을 고를 때 복잡하게 생각할 필요 없다. 룸 크기 확인, 음향 체크, 환기 상태, 주차, 예약 — 이 다섯 가지만 챙기면 된다. 화려한 광고 문구에 현혹되지 말고, 직접 전화해서 구체적인 질문을 던져라. 성의 없이 대답하는 곳은 가서도 서비스가 그 수준이다.</p>
-      <p>일산에서 좋은 룸을 찾는 건 운이 아니라 준비의 문제다. 이 글에서 정리한 체크리스트를 기준으로 비교하면, 적어도 "여기 왜 왔지" 하는 후회는 하지 않을 거다. 더 자세한 업소 정보와 실시간 리뷰는 놀쿨에서 확인할 수 있다.</p>
-    </section>
+      <!-- Pull Quote -->
+      <blockquote class="pull-quote">
+        "일산룸은 한 번 잘못 고르면 그날 저녁이 통째로 날아간다"
+      </blockquote>
 
-  </main>
+      <!-- Section 2: 지역별 비교 -->
+      <section class="article-section">
+        <h2>일산 지역별 룸 특징 — 정발산 vs 마두 vs 백석</h2>
+        <p>정발산역 일대는 일산에서 가장 활발한 상권이다. 라페스타와 웨스턴돔을 중심으로 일산룸이 밀집해 있고, 대부분 2018년 이후에 리모델링을 거쳤다. 인테리어가 깔끔하고 음향 장비가 최신이라 처음 방문하는 사람에게 무난하다. 다만 주말 밤 10시 이후에는 예약 없이 가면 자리가 없는 경우가 많다.</p>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <p>본 사이트는 일산룸 관련 정보를 제공하는 가이드입니다.</p>
-    <p>&copy; 2026 일산룸 가이드. All rights reserved.</p>
-  </footer>
+        <!-- Image 2 -->
+        <figure class="article-photo">
+          <img src="https://images.unsplash.com/photo-1572116469696-31de0f17cc34?w=720&q=80&fm=webp" alt="일산 야경 — 네온사인이 빛나는 번화가 거리 풍경" loading="lazy" width="720" height="480">
+          <figcaption>일산 라페스타 상권 야경 — 주말 밤이면 유동인구가 2배로 늘어난다</figcaption>
+        </figure>
+
+        <p>마두역 쪽은 상대적으로 오래된 업소가 많지만, 그만큼 단골 위주로 운영되는 곳이 있다. 단골이 많다는 건 서비스가 검증됐다는 뜻이기도 하다. 일산룸 중에서 분위기를 중시하는 사람이라면 마두 쪽 숨은 명소를 찾아보는 것도 방법이다. 백석역 근처는 최근 신규 오픈한 곳이 늘어나면서 경쟁이 치열해졌다. 신규 업소일수록 초기 고객을 잡기 위해 시설에 투자를 많이 한 상태라 시설 대비 만족도가 높은 편이다.</p>
+
+        <!-- Comparison Table -->
+        <div class="compare-table">
+          <h3>일산룸 지역별 비교표</h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>항목</th>
+                  <th>정발산</th>
+                  <th>마두</th>
+                  <th>백석</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>인테리어</td>
+                  <td><span class="badge good">최신</span></td>
+                  <td><span class="badge mid">보통</span></td>
+                  <td><span class="badge good">신규</span></td>
+                </tr>
+                <tr>
+                  <td>음향 장비</td>
+                  <td><span class="badge good">최신형</span></td>
+                  <td><span class="badge mid">구형 혼재</span></td>
+                  <td><span class="badge good">최신형</span></td>
+                </tr>
+                <tr>
+                  <td>접근성</td>
+                  <td><span class="badge good">역세권</span></td>
+                  <td><span class="badge mid">보통</span></td>
+                  <td><span class="badge mid">차량 필수</span></td>
+                </tr>
+                <tr>
+                  <td>주말 대기</td>
+                  <td><span class="badge warn">30분+</span></td>
+                  <td><span class="badge good">적음</span></td>
+                  <td><span class="badge mid">보통</span></td>
+                </tr>
+                <tr>
+                  <td>단골 비율</td>
+                  <td><span class="badge mid">낮음</span></td>
+                  <td><span class="badge good">높음</span></td>
+                  <td><span class="badge mid">낮음</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA 1 (40% position) -->
+      <div class="cta-box">
+        <a href="https://nolcool.com" class="cta-button" target="_blank" rel="noopener">
+          놀쿨에서 일산룸 더 보기 →
+        </a>
+      </div>
+
+      <!-- Section 3: 체크리스트 -->
+      <section class="article-section">
+        <h2>일산룸 고를 때 반드시 확인할 5가지</h2>
+
+        <!-- Image 3 -->
+        <figure class="article-photo">
+          <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=720&q=80&fm=webp" alt="일산룸 음향 장비 — 마이크와 스피커 시스템 클로즈업" loading="lazy" width="720" height="480">
+          <figcaption>음향 장비 상태 하나로 그날 분위기가 결정된다 — 최신 기기 여부를 반드시 확인하자</figcaption>
+        </figure>
+
+        <div class="checklist">
+          <div class="check-item">
+            <span class="check-num">01</span>
+            <div>
+              <h3>룸 크기와 인원 수 매칭</h3>
+              <p>4인이 갈 건데 6인실을 잡으면 썰렁하고, 2인실에 4명이 들어가면 숨이 막힌다. 일산룸 예약할 때 인원수를 정확히 말하고, 룸 크기를 사진으로 미리 확인하는 게 기본이다. 전화로 "몇 평이에요?"라고 물어보면 대략 감이 온다.</p>
+            </div>
+          </div>
+          <div class="check-item">
+            <span class="check-num">02</span>
+            <div>
+              <h3>음향 장비 상태</h3>
+              <p>마이크가 지직거리거나 스피커에서 잡음이 나면 분위기가 순식간에 깨진다. 최근 리모델링한 일산룸은 대부분 금영 최신 기기를 쓰고 있지만, 오래된 곳은 TJ 구형 기기를 아직 쓰는 경우가 있다. 신곡 업데이트가 안 된 기기는 최신 곡을 부를 수 없으니 미리 확인하자.</p>
+            </div>
+          </div>
+          <div class="check-item">
+            <span class="check-num">03</span>
+            <div>
+              <h3>환기 시스템</h3>
+              <p>지하 매장이 많은 일산 특성상 환기가 안 되는 곳이 꽤 있다. 30분만 있어도 공기가 탁해지면 머리가 아프고 목이 쉰다. 방문 전에 "환기 잘 되나요?"라고 한마디만 물어봐도 지뢰를 피할 수 있다.</p>
+            </div>
+          </div>
+          <div class="check-item">
+            <span class="check-num">04</span>
+            <div>
+              <h3>주차 여부</h3>
+              <p>일산은 차 없이 다니기 어려운 동네다. 정발산역 근처는 그나마 대중교통이 되지만, 마두나 백석은 차가 필수다. 건물 자체 주차장이 있는지, 근처 공영 주차장은 어딘지 미리 파악해두면 당일 헤매지 않는다.</p>
+            </div>
+          </div>
+          <div class="check-item">
+            <span class="check-num">05</span>
+            <div>
+              <h3>예약 시간대</h3>
+              <p>일산룸은 금요일 밤 9시~11시가 피크타임이다. 이 시간대에 워크인으로 가면 좋은 룸은 이미 다 찼다. 평일 저녁이나 토요일 오후 일찍 가면 여유롭게 원하는 룸을 고를 수 있다. 미리 예약하면 피크타임에도 원하는 룸을 잡을 수 있다.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Pull Quote 2 -->
+      <blockquote class="pull-quote">
+        "좋은 일산룸은 검색이 아니라 경험에서 나온다"
+      </blockquote>
+
+      <!-- Section 4: 시간대별 -->
+      <section class="article-section">
+        <h2>시간대별 일산룸 분위기 변화</h2>
+
+        <!-- Image 4 -->
+        <figure class="article-photo">
+          <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=720&q=80&fm=webp" alt="일산 밤문화 분위기 — DJ 부스와 조명이 어우러진 나이트 씬" loading="lazy" width="720" height="480">
+          <figcaption>밤 10시가 넘으면 분위기가 완전히 달라진다 — 시간대 선택이 곧 경험의 질을 결정한다</figcaption>
+        </figure>
+
+        <p>같은 일산룸이라도 시간대에 따라 분위기가 완전히 달라진다. 오후 6시~8시는 비교적 조용한 시간이다. 직장인들이 퇴근 후 가볍게 한두 시간 즐기는 시간대라 분위기가 차분하다. 이 시간에 가면 대기 없이 바로 들어갈 수 있고, 직원 응대도 여유롭다.</p>
+        <p>밤 9시가 넘으면 상황이 바뀐다. 2차로 넘어오는 손님들이 몰리면서 복도부터 시끄러워진다. 인기 있는 일산룸은 이 시간대에 만석이 되고, 빈 룸이 나올 때까지 로비에서 기다려야 하는 경우도 생긴다. 자정 이후에는 분위기가 또 달라지는데, 남아 있는 손님들은 대부분 장시간 이용자라 좀 더 자유로운 분위기가 된다.</p>
+        <p>주말과 평일의 차이도 크다. 금요일 밤은 일산룸 전체가 전쟁터라고 봐야 하고, 일요일 저녁은 의외로 한산하다. 일요일 저녁에 일산룸을 이용하면 여유롭게 3~4시간 즐길 수 있다는 게 경험자들 사이에서는 이미 알려진 팁이다.</p>
+
+        <!-- Before/After Comparison -->
+        <div class="before-after">
+          <div class="ba-card">
+            <div class="ba-label before">평일 저녁 7시</div>
+            <p>대기 없음. 원하는 룸 선택 가능. 직원 응대 여유로움. 조용한 분위기에서 편하게 이용.</p>
+          </div>
+          <div class="ba-arrow">→</div>
+          <div class="ba-card">
+            <div class="ba-label after">금요일 밤 10시</div>
+            <p>30분~1시간 대기. 남은 룸 배정. 복도까지 소음. 서둘러 나가야 하는 압박감.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Review Highlights -->
+      <section class="article-section reviews-section">
+        <h2>일산룸 경험자 후기 하이라이트</h2>
+
+        <!-- Image 5 -->
+        <figure class="article-photo">
+          <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=720&q=80&fm=webp" alt="나이트 분위기 — 형형색색 조명이 빛나는 실내 파티 장면" loading="lazy" width="720" height="480">
+          <figcaption>좋은 곳을 찾으면 이런 밤이 된다 — 경험자들의 솔직 후기 모음</figcaption>
+        </figure>
+
+        <div class="review-cards">
+          <div class="review-card">
+            <div class="review-stars">★★★★★</div>
+            <p class="review-text">"정발산 쪽 신축 룸 가봤는데, 음향이 진짜 다르다. 마이크 잡는 순간 '아 여기 제대로구나' 느낌. 지인 모임은 여기서만 한다."</p>
+            <span class="review-author">— 일산 거주 5년차 직장인</span>
+          </div>
+          <div class="review-card">
+            <div class="review-stars">★★★★☆</div>
+            <p class="review-text">"마두 쪽 숨은 곳 찾았는데 단골들이 많더라. 처음엔 좀 낡아 보여서 걱정했는데, 서비스가 확실히 다름. 사장님이 직접 챙겨주는 느낌."</p>
+            <span class="review-author">— 주말마다 일산룸 이용자</span>
+          </div>
+          <div class="review-card">
+            <div class="review-stars">★★★★★</div>
+            <p class="review-text">"백석 신규 오픈한 데 갔더니 시설이 미쳤다. 룸 크기도 넉넉하고 환기도 잘 되고. 신규라 그런지 관리 상태가 확실히 좋았다."</p>
+            <span class="review-author">— 백석역 근처 거주자</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 5: 실수 모음 -->
+      <section class="article-section">
+        <h2>일산룸 처음 가는 사람이 하는 실수 TOP3</h2>
+        <p><strong>실수 1: 후기만 보고 간다.</strong> 블로그 후기 중 상당수는 업소 측에서 의뢰한 협찬 리뷰다. "분위기 최고" "강추" 같은 뜬구름 잡는 후기보다, 구체적으로 룸 크기나 음향 상태를 언급한 후기가 신뢰할 만하다. 일산룸 후기를 볼 때는 사진 속 룸 크기와 인테리어 상태를 유심히 보는 게 핵심이다.</p>
+
+        <!-- Image 6 -->
+        <figure class="article-photo">
+          <img src="https://images.unsplash.com/photo-1598387993441-a364f854c3e1?w=720&q=80&fm=webp" alt="칵테일 바 분위기 — 어두운 조명 아래 세련된 바 카운터" loading="lazy" width="720" height="480">
+          <figcaption>분위기 좋은 곳과 아닌 곳의 차이는 사진만 봐도 느껴진다</figcaption>
+        </figure>
+
+        <p><strong>실수 2: 예약 없이 간다.</strong> 특히 금~토 저녁에 예약 없이 일산룸에 가면 30분~1시간 대기는 기본이다. 전화 한 통이면 끝나는 일을 귀찮아서 안 하면 그날 저녁 전체가 꼬인다.</p>
+        <p><strong>실수 3: 위치 확인을 안 한다.</strong> 네이버 지도에 나온 위치와 실제 입구가 다른 경우가 의외로 많다. 지하에 있는 일산룸은 건물 정면이 아니라 측면이나 후면으로 들어가야 하는 경우가 있어서, 미리 입구 위치를 물어보는 게 좋다.</p>
+      </section>
+
+      <!-- CTA 2 (Bottom) -->
+      <div class="cta-box">
+        <a href="https://nolcool.com" class="cta-button" target="_blank" rel="noopener">
+          놀쿨에서 일산룸 더 보기 →
+        </a>
+      </div>
+
+      <!-- Secret Section (revealed at 80% scroll) -->
+      <section class="article-section secret-section" id="secretSection">
+        <div class="secret-badge">INSIDER TIP</div>
+        <h2>현지인만 아는 일산룸 꿀팁 3가지</h2>
+        <p>여기까지 읽은 사람만 알려주는 정보다. 검색해도 안 나오는 진짜 팁이다.</p>
+        <div class="insider-tips">
+          <div class="tip-card">
+            <span class="tip-num">TIP 1</span>
+            <h3>화요일 저녁이 진짜 꿀타임이다</h3>
+            <p>다들 금~토만 생각하는데, 화요일 저녁 8시가 일산룸 최적 시간이다. 주중이라 한산하고, 직원들도 여유로워서 서비스 퀄리티가 주말과 차원이 다르다. 좋은 룸을 골라서 들어갈 수 있는 건 덤이다.</p>
+          </div>
+          <div class="tip-card">
+            <span class="tip-num">TIP 2</span>
+            <h3>전화할 때 이 질문을 던져라</h3>
+            <p>"리모델링 언제 하셨어요?" — 이 한마디로 시설 상태를 가늠할 수 있다. 2022년 이후 리모델링한 곳이면 음향·환기·인테리어 모두 최신 수준일 가능성이 높다. 말을 흐리는 곳은 피하는 게 맞다.</p>
+          </div>
+          <div class="tip-card">
+            <span class="tip-num">TIP 3</span>
+            <h3>네이버 예약보다 직접 전화가 낫다</h3>
+            <p>네이버 예약은 편하지만 룸을 선택할 수 없다. 직접 전화하면 "큰 룸으로 배정해달라" "창가 쪽 룸 가능하냐" 같은 요청이 가능하다. 이 차이가 체감 만족도를 크게 바꾼다.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 6: 마무리 -->
+      <section class="article-section">
+        <h2>결론 — 일산룸 선택 기준은 단순하다</h2>
+        <p>일산룸을 고를 때 복잡하게 생각할 필요 없다. 룸 크기 확인, 음향 체크, 환기 상태, 주차, 예약 — 이 다섯 가지만 챙기면 된다. 화려한 광고 문구에 현혹되지 말고, 직접 전화해서 구체적인 질문을 던져라. 성의 없이 대답하는 곳은 가서도 서비스가 그 수준이다.</p>
+        <p>일산에서 좋은 룸을 찾는 건 운이 아니라 준비의 문제다. 이 글에서 정리한 체크리스트를 기준으로 비교하면, 적어도 "여기 왜 왔지" 하는 후회는 하지 않을 거다. 더 자세한 업소 정보와 실시간 리뷰는 놀쿨에서 확인할 수 있다.</p>
+      </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>본 사이트는 일산룸 관련 정보를 제공하는 가이드입니다.</p>
+      <p>&copy; 2026 일산룸 가이드. All rights reserved.</p>
+    </footer>
+
+  </div>
 
   <script defer src="/main.js"></script>
 </body>
