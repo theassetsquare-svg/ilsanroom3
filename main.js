@@ -1,3 +1,10 @@
+// ===== Error Boundary =====
+window.onerror = function (msg, src, line) {
+  var el = document.getElementById('errorBoundary');
+  if (el) el.classList.add('show');
+  return false;
+};
+
 // ===== Skeleton → Content =====
 (function () {
   var skeleton = document.getElementById('skeleton');
@@ -11,7 +18,7 @@
   else window.addEventListener('load', show);
 })();
 
-// ===== Social Proof (monthly count, persist in session) =====
+// ===== Social Proof (monthly count, persistSession) =====
 (function () {
   var KEY = 'ilsanroom3_mviews';
   var base = 4291;
@@ -28,8 +35,7 @@
   var el = document.getElementById('countdownSlots');
   if (!el) return;
   var slots = [2, 3, 4, 5];
-  var pick = slots[Math.floor(Math.random() * slots.length)];
-  el.textContent = pick + '자리';
+  el.textContent = slots[Math.floor(Math.random() * slots.length)] + '자리';
 })();
 
 // ===== Swipe Gallery =====
@@ -45,7 +51,6 @@
   var diff = 0;
   var dragging = false;
 
-  // Build dots
   for (var i = 0; i < total; i++) {
     var dot = document.createElement('button');
     dot.className = 'gallery-dot' + (i === 0 ? ' active' : '');
@@ -63,13 +68,11 @@
     for (var j = 0; j < dots.length; j++) dots[j].classList.toggle('active', j === current);
   }
 
-  // Dot click
   dotsContainer.addEventListener('click', function (e) {
     var btn = e.target.closest('.gallery-dot');
     if (btn) goTo(parseInt(btn.dataset.idx, 10));
   });
 
-  // Touch swipe
   track.addEventListener('touchstart', function (e) { startX = e.touches[0].clientX; dragging = true; }, { passive: true });
   track.addEventListener('touchmove', function (e) { if (dragging) diff = e.touches[0].clientX - startX; }, { passive: true });
   track.addEventListener('touchend', function () {
@@ -78,14 +81,26 @@
     diff = 0;
   });
 
-  // Mouse drag
   track.addEventListener('mousedown', function (e) { startX = e.clientX; dragging = true; e.preventDefault(); });
-  document.addEventListener('mousemove', function (e) { if (dragging) diff = e.clientX - startX; });
-  document.addEventListener('mouseup', function () {
+
+  var onMouseMove = function (e) { if (dragging) diff = e.clientX - startX; };
+  var onMouseUp = function () {
     if (!dragging) return;
     dragging = false;
     if (Math.abs(diff) > 50) goTo(current + (diff < 0 ? 1 : -1));
     diff = 0;
+  };
+  document.addEventListener('mousemove', onMouseMove);
+  document.addEventListener('mouseup', onMouseUp);
+
+  // Auto-advance every 4s, cleanup on page hide
+  var autoTimer = setInterval(function () { goTo((current + 1) % total); }, 4000);
+
+  // Cleanup on page unload
+  window.addEventListener('pagehide', function () {
+    clearInterval(autoTimer);
+    document.removeEventListener('mousemove', onMouseMove);
+    document.removeEventListener('mouseup', onMouseUp);
   });
 })();
 
@@ -112,27 +127,14 @@ function showQuizResult() {
 
   var a = quizAnswers;
   var type;
-  if (a[1] === 'a' || a[3] === 'a') {
-    type = 'vip';
-  } else if (a[1] === 'b' || a[2] === 'b') {
-    type = 'party';
-  } else {
-    type = 'chill';
-  }
+  if (a[1] === 'a' || a[3] === 'a') type = 'vip';
+  else if (a[1] === 'b' || a[2] === 'b') type = 'party';
+  else type = 'chill';
 
   var results = {
-    vip: {
-      t: '프라이빗 VIP형',
-      d: '조용하고 격식 있는 공간을 선호하는 당신. 마두 쪽 단골 위주 업소나 정발산 프리미엄 룸이 딱 맞다. 서비스 질과 분위기를 최우선으로 따지는 타입이다.'
-    },
-    party: {
-      t: '에너지 파티형',
-      d: '북적이는 분위기에서 에너지를 충전하는 당신. 금~토 밤 정발산역 상권이 최적이다. 단, 예약 필수! 워크인으로 가면 대기 각오해야 한다.'
-    },
-    chill: {
-      t: '여유 힐링형',
-      d: '한적한 시간대에 느긋하게 즐기는 당신. 평일 저녁이나 일요일 오후가 골든타임이다. 백석 신규 오픈 업소를 노려보면 시설 대비 만족도가 높다.'
-    }
+    vip: { t: '프라이빗 VIP형', d: '조용하고 격식 있는 공간을 선호하는 당신. 마두 쪽 단골 위주 업소나 정발산 프리미엄 룸이 딱 맞다. 서비스 질과 분위기를 최우선으로 따지는 타입이다.' },
+    party: { t: '에너지 파티형', d: '북적이는 분위기에서 에너지를 충전하는 당신. 금~토 밤 정발산역 상권이 최적이다. 단, 예약 필수! 워크인으로 가면 대기 각오해야 한다.' },
+    chill: { t: '여유 힐링형', d: '한적한 시간대에 느긋하게 즐기는 당신. 평일 저녁이나 일요일 오후가 골든타임이다. 백석 신규 오픈 업소를 노려보면 시설 대비 만족도가 높다.' }
   };
 
   title.textContent = '당신은 "' + results[type].t + '"';
@@ -170,7 +172,6 @@ function showQuizResult() {
   var upCount = 0;
   var KEY = 'ilsanroom3_exit_shown';
 
-  // Don't show again in same session
   try { if (sessionStorage.getItem(KEY)) return; } catch (e) {}
 
   function onScroll() {
@@ -179,7 +180,6 @@ function showQuizResult() {
     var docHeight = document.documentElement.scrollHeight - window.innerHeight;
     var pct = docHeight > 0 ? y / docHeight : 0;
 
-    // Only trigger after user has scrolled past 30%
     if (pct > 0.3 && y < lastY) {
       upCount += (lastY - y);
       if (upCount > 200) {

@@ -47,14 +47,20 @@
     <div class="skeleton-line w70"></div>
   </div>
 
-  <!-- Exit Intent Popup -->
+  <!-- Exit Intent Popup — WHITE text + shadow on dark overlay -->
   <div class="exit-popup" id="exitPopup">
     <div class="exit-popup-inner">
       <button class="exit-close" id="exitClose" aria-label="닫기">&times;</button>
       <p class="exit-title">잠깐! 이것만 보고 가세요</p>
-      <p class="exit-desc">일산룸 처음 가는 사람이 모르면 손해 보는 핵심 체크리스트, 놀쿨에 다 정리되어 있습니다.</p>
-      <a href="https://ilsanroom.pages.dev/" class="cta-button exit-cta" target="_blank" rel="noopener">놀쿨에서 확인하기 →</a>
+      <p class="exit-desc">일산룸 처음 가는 사람이 모르면 손해 보는 핵심 체크리스트가 정리되어 있습니다.</p>
+      <a href="https://ilsanroom.pages.dev/" class="cta-button exit-cta" target="_blank" rel="noopener noreferrer">일산룸 더 알아보기 →</a>
     </div>
+  </div>
+
+  <!-- Error Boundary UI (hidden, shown by JS on error) -->
+  <div class="error-boundary" id="errorBoundary">
+    <p>페이지 로딩 중 오류가 발생했습니다.</p>
+    <button class="error-retry-btn" onclick="location.reload()">다시 시도</button>
   </div>
 
   <!-- Main Content -->
@@ -65,13 +71,12 @@
       이번 달 <strong id="viewCount">4,291</strong>명이 이 글을 읽었습니다
     </div>
 
-    <!-- Hero with dark overlay -->
+    <!-- Hero with dark overlay — WHITE text + text-shadow -->
     <header class="hero" role="banner">
       <div class="hero-overlay"></div>
       <div class="hero-content">
         <h1>일산룸 — 예약 전에 반드시 읽어야 할 글</h1>
         <p class="hero-sub">검색 그만해라. 이 글 하나면 끝난다.</p>
-        <!-- Countdown -->
         <div class="countdown-bar" id="countdownBar">
           이번 주말 인기 룸 예약 마감까지 <strong id="countdownSlots">3자리</strong> 남음
         </div>
@@ -109,7 +114,6 @@
 
         <p>마두역 쪽은 상대적으로 오래된 업소가 많지만, 그만큼 단골 위주로 운영되는 곳이 있다. 단골이 많다는 건 서비스가 검증됐다는 뜻이기도 하다. 일산룸 중에서 분위기를 중시하는 사람이라면 마두 쪽 숨은 명소를 찾아보는 것도 방법이다. 백석역 근처는 최근 신규 오픈한 곳이 늘어나면서 경쟁이 치열해졌다. 신규 업소일수록 초기 고객을 잡기 위해 시설에 투자를 많이 한 상태라 시설 대비 만족도가 높은 편이다.</p>
 
-        <!-- Comparison Table -->
         <div class="compare-table">
           <h3>일산룸 지역별 비교표</h3>
           <div class="table-wrap">
@@ -129,7 +133,7 @@
         </div>
       </section>
 
-      <!-- Swipe Gallery: 낮 vs 밤 비교 -->
+      <!-- Swipe Gallery -->
       <section class="article-section">
         <h2>낮 vs 밤 — 일산룸 분위기 비교 갤러리</h2>
         <p>같은 거리도 시간대에 따라 완전히 다른 얼굴을 보여준다. 직접 확인해봐라.</p>
@@ -165,10 +169,10 @@
         </div>
       </section>
 
-      <!-- CTA 1 (40% position) -->
+      <!-- CTA 1 -->
       <div class="cta-box">
-        <a href="https://ilsanroom.pages.dev/" class="cta-button" target="_blank" rel="noopener">
-          놀쿨에서 일산룸 더 보기 →
+        <a href="https://ilsanroom.pages.dev/" class="cta-button" target="_blank" rel="noopener noreferrer">
+          일산룸 더 보기 →
         </a>
       </div>
 
@@ -228,9 +232,7 @@
       <section class="article-section quiz-section">
         <h2>당신에게 맞는 일산룸 유형은?</h2>
         <p>3가지 질문에 답하면 당신에게 딱 맞는 스타일을 알려준다.</p>
-
         <div class="quiz-wrap" id="quizWrap">
-          <!-- Q1 -->
           <div class="quiz-card active" data-q="1">
             <span class="quiz-step">1 / 3</span>
             <p class="quiz-question">선호하는 분위기는?</p>
@@ -238,7 +240,6 @@
             <button class="quiz-btn" data-val="b" onclick="quizAnswer(1,'b')">활기차고 북적이는 분위기</button>
             <button class="quiz-btn" data-val="c" onclick="quizAnswer(1,'c')">깔끔한 신축 인테리어</button>
           </div>
-          <!-- Q2 -->
           <div class="quiz-card" data-q="2">
             <span class="quiz-step">2 / 3</span>
             <p class="quiz-question">주로 언제 방문하나?</p>
@@ -246,7 +247,6 @@
             <button class="quiz-btn" data-val="b" onclick="quizAnswer(2,'b')">금~토 밤 (본격적으로)</button>
             <button class="quiz-btn" data-val="c" onclick="quizAnswer(2,'c')">일요일 오후 (한가하게)</button>
           </div>
-          <!-- Q3 -->
           <div class="quiz-card" data-q="3">
             <span class="quiz-step">3 / 3</span>
             <p class="quiz-question">가장 중요하게 보는 건?</p>
@@ -254,12 +254,11 @@
             <button class="quiz-btn" data-val="b" onclick="quizAnswer(3,'b')">음향 장비와 최신 시설</button>
             <button class="quiz-btn" data-val="c" onclick="quizAnswer(3,'c')">접근성과 주차 편의</button>
           </div>
-          <!-- Result -->
           <div class="quiz-result" id="quizResult">
             <span class="quiz-result-badge">결과</span>
             <p class="quiz-result-title" id="quizResultTitle"></p>
             <p class="quiz-result-desc" id="quizResultDesc"></p>
-            <a href="https://ilsanroom.pages.dev/" class="cta-button quiz-cta" target="_blank" rel="noopener">놀쿨에서 맞춤 추천 보기 →</a>
+            <a href="https://ilsanroom.pages.dev/" class="cta-button quiz-cta" target="_blank" rel="noopener noreferrer">맞춤 추천 보기 →</a>
           </div>
         </div>
       </section>
@@ -274,7 +273,7 @@
         </figure>
 
         <p>같은 일산룸이라도 시간대에 따라 분위기가 완전히 달라진다. 오후 6시~8시는 비교적 조용한 시간이다. 직장인들이 퇴근 후 가볍게 한두 시간 즐기는 시간대라 분위기가 차분하다. 이 시간에 가면 대기 없이 바로 들어갈 수 있고, 직원 응대도 여유롭다.</p>
-        <p>밤 9시가 넘으면 상황이 바뀐다. 2차로 넘어오는 손님들이 몰리면서 복도부터 시끄러워진다. 인기 있는 일산룸은 이 시간대에 만석이 되고, 빈 룸이 나올 때까지 로비에서 기다려야 하는 경우도 생긴다. 자정 이후에는 분위기가 또 달라지는데, 남아 있는 손님들은 대부분 장시간 이용자라 좀 더 자유로운 분위기가 된다.</p>
+        <p>밤 9시가 넘으면 상황이 바뀐다. 2차로 넘어오는 손님들이 몰리면서 복도부터 시끄러워진다. 인기 있는 곳은 이 시간대에 만석이 되고, 빈 룸이 나올 때까지 로비에서 기다려야 하는 경우도 생긴다. 자정 이후에는 분위기가 또 달라지는데, 남아 있는 손님들은 대부분 장시간 이용자라 좀 더 자유로운 분위기가 된다.</p>
         <p>주말과 평일의 차이도 크다. 금요일 밤은 일산룸 전체가 전쟁터라고 봐야 하고, 일요일 저녁은 의외로 한산하다. 일요일 저녁에 일산룸을 이용하면 여유롭게 3~4시간 즐길 수 있다는 게 경험자들 사이에서는 이미 알려진 팁이다.</p>
 
         <div class="before-after">
@@ -326,7 +325,7 @@
         <p><strong>실수 3: 위치 확인을 안 한다.</strong> 네이버 지도에 나온 위치와 실제 입구가 다른 경우가 의외로 많다. 지하에 있는 곳은 건물 정면이 아니라 측면이나 후면으로 들어가야 하는 경우가 있어서, 미리 입구 위치를 물어보는 게 좋다.</p>
       </section>
 
-      <!-- Secret Section (revealed at 80% scroll) -->
+      <!-- Secret Section (80% scroll) -->
       <section class="article-section secret-section" id="secretSection">
         <div class="secret-badge">INSIDER TIP</div>
         <h2>현지인만 아는 일산룸 꿀팁 3가지</h2>
@@ -335,7 +334,7 @@
           <div class="tip-card">
             <span class="tip-num">TIP 1</span>
             <h3>화요일 저녁이 진짜 꿀타임이다</h3>
-            <p>다들 금~토만 생각하는데, 화요일 저녁 8시가 일산룸 최적 시간이다. 주중이라 한산하고, 직원들도 여유로워서 서비스 퀄리티가 주말과 차원이 다르다. 좋은 룸을 골라서 들어갈 수 있는 건 덤이다.</p>
+            <p>다들 금~토만 생각하는데, 화요일 저녁 8시가 최적 시간이다. 주중이라 한산하고, 직원들도 여유로워서 서비스 퀄리티가 주말과 차원이 다르다. 좋은 룸을 골라서 들어갈 수 있는 건 덤이다.</p>
           </div>
           <div class="tip-card">
             <span class="tip-num">TIP 2</span>
@@ -354,13 +353,13 @@
       <section class="article-section">
         <h2>결론 — 일산룸 선택 기준은 단순하다</h2>
         <p>일산룸을 고를 때 복잡하게 생각할 필요 없다. 룸 크기 확인, 음향 체크, 환기 상태, 주차, 예약 — 이 다섯 가지만 챙기면 된다. 화려한 광고 문구에 현혹되지 말고, 직접 전화해서 구체적인 질문을 던져라. 성의 없이 대답하는 곳은 가서도 서비스가 그 수준이다.</p>
-        <p>일산에서 좋은 룸을 찾는 건 운이 아니라 준비의 문제다. 이 글에서 정리한 체크리스트를 기준으로 비교하면, 적어도 "여기 왜 왔지" 하는 후회는 하지 않을 거다. 더 자세한 업소 정보와 실시간 리뷰는 놀쿨에서 확인할 수 있다.</p>
+        <p>일산에서 좋은 룸을 찾는 건 운이 아니라 준비의 문제다. 이 글에서 정리한 체크리스트를 기준으로 비교하면, 적어도 "여기 왜 왔지" 하는 후회는 하지 않을 거다. 더 자세한 업소 정보와 실시간 리뷰는 메인 사이트에서 확인할 수 있다.</p>
       </section>
 
       <!-- Bottom CTA -->
       <div class="cta-box cta-box-bottom">
-        <a href="https://ilsanroom.pages.dev/" class="cta-button cta-button-big" target="_blank" rel="noopener">
-          놀쿨에서 더 많은 곳 보기 →
+        <a href="https://ilsanroom.pages.dev/" class="cta-button cta-button-big" target="_blank" rel="noopener noreferrer">
+          일산룸 더 많은 곳 보기 →
         </a>
       </div>
 
@@ -371,6 +370,18 @@
       <p>&copy; 2026 일산룸 가이드. All rights reserved.</p>
     </footer>
 
+  </div>
+
+  <!-- Fixed Bottom Contact Bar (mobile only) -->
+  <div class="fixed-bottom-bar" id="fixedBottomBar">
+    <a href="https://ilsanroom.pages.dev/" class="bottom-bar-btn" target="_blank" rel="noopener noreferrer">
+      <span class="bottom-bar-icon">&#127968;</span>
+      <span>일산룸 메인</span>
+    </a>
+    <a href="https://ilsanroom.pages.dev/" class="bottom-bar-btn bottom-bar-primary" target="_blank" rel="noopener noreferrer">
+      <span class="bottom-bar-icon">&#128222;</span>
+      <span>문의하기</span>
+    </a>
   </div>
 
   <script defer src="/main.js"></script>
