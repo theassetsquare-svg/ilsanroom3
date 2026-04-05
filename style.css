@@ -188,7 +188,7 @@ html { scroll-behavior: smooth; }
 .exit-cta { max-width: 320px; }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-/* ===== FIXED BOTTOM NAV (mobile only) ===== */
+/* ===== FIXED BOTTOM CONTACT BAR (mobile + PC) ===== */
 .fixed-bottom-bar {
   position: fixed; bottom: 0; left: 0; right: 0; z-index: 9000;
   height: 56px; background: #0a0a14; border-top: 1px solid #333;
@@ -201,7 +201,7 @@ html { scroll-behavior: smooth; }
   min-height: 44px; transition: background 0.15s;
 }
 .bottom-bar-btn:active { background: rgba(255,255,255,0.08); }
-.bottom-bar-primary { background: linear-gradient(135deg, #7c3aed, #9333ea); color: #fff; }
+.bottom-bar-primary { background: linear-gradient(135deg, #7c3aed, #9333ea); color: #fff; font-size: 15px; }
 .bottom-bar-primary:active { opacity: 0.9; }
 .bottom-bar-icon { font-size: 18px; }
 
@@ -210,8 +210,8 @@ html { scroll-behavior: smooth; }
 
 /* ===== RESPONSIVE — PC ===== */
 @media (min-width: 768px) {
-  body { padding-bottom: 0; }
-  .fixed-bottom-bar { display: none; }
+  body { padding-bottom: 56px; }
+  .fixed-bottom-bar { max-width: 900px; left: 50%; transform: translateX(-50%); border-radius: 16px 16px 0 0; }
   .footer { padding-bottom: 32px; }
   .hero { min-height: 440px; }
   .hero-content { padding: 72px 40px 64px; }
