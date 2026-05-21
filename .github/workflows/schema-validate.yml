@@ -14,6 +14,22 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Wait for Cloudflare Pages deploy (push only)
+        if: github.event_name == 'push'
+        run: |
+          echo "Push event → Cloudflare Pages 배포 대기 (최대 5분)"
+          for i in 1 2 3 4 5 6 7 8 9 10; do
+            sleep 30
+            # 새로운 빌드의 sitemap lastmod 또는 schema가 라이브에 반영됐는지 체크
+            HTML=$(curl -sL https://ilsanroom3.pages.dev/)
+            # 새 빌드 마커: WebSite Schema가 @graph 안에 있어야 통과
+            if echo "$HTML" | grep -q '"@graph"' && echo "$HTML" | grep -q "site.webmanifest"; then
+              echo "✅ 배포 반영 확인 (${i}0초 경과)"
+              break
+            fi
+            echo "⏳ 배포 대기중... (${i}0초 경과)"
+          done
+
       - name: 🚨 영구 룰 — 위험 단어 차단 (Live Site)
         run: |
           DANGEROUS="룸싸롱 룸살롱 노래방 유흥 밤문화 2차 금영"
