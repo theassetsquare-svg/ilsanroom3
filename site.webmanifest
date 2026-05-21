@@ -1,0 +1,25 @@
+{
+  "name": "일산룸 추천 가이드",
+  "short_name": "일산룸",
+  "description": "일산룸 10년 경험자가 정발산·마두·백석 3대 권역을 직접 비교한 솔직 가이드",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#1a1a2e",
+  "theme_color": "#1a1a2e",
+  "lang": "ko-KR",
+  "dir": "ltr",
+  "categories": ["lifestyle", "travel", "social"],
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "신실장 전화", "short_name": "전화", "url": "/?action=call", "description": "신실장 010-3695-4929 즉시 연결" },
+    { "name": "정발산 권역", "short_name": "정발산", "url": "/#section-area", "description": "정발산권 일산룸 정보" },
+    { "name": "마두 권역", "short_name": "마두", "url": "/#section-area", "description": "마두권 일산룸 정보" },
+    { "name": "체크리스트", "short_name": "체크", "url": "/#section-checklist", "description": "일산룸 고를 때 5가지 체크" }
+  ]
+}

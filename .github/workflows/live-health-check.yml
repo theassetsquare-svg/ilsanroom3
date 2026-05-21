@@ -1,0 +1,78 @@
+name: Live Health Check — 6시간마다
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+
+jobs:
+  health:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check / (200 OK)
+        run: |
+          CODE=$(curl -sL -o /dev/null -w "%{http_code}" https://ilsanroom3.pages.dev/)
+          if [ "$CODE" != "200" ]; then
+            echo "::error::/ returned HTTP $CODE"
+            exit 1
+          fi
+          echo "✅ / → 200"
+
+      - name: Check /legal/ (200 OK)
+        run: |
+          CODE=$(curl -sL -o /dev/null -w "%{http_code}" https://ilsanroom3.pages.dev/legal/)
+          if [ "$CODE" != "200" ]; then
+            echo "::error::/legal/ returned HTTP $CODE"
+            exit 1
+          fi
+          echo "✅ /legal/ → 200"
+
+      - name: Check sitemap.xml
+        run: |
+          CODE=$(curl -sL -o /dev/null -w "%{http_code}" https://ilsanroom3.pages.dev/sitemap.xml)
+          [ "$CODE" = "200" ] || { echo "::error::sitemap.xml → $CODE"; exit 1; }
+          echo "✅ sitemap.xml"
+
+      - name: Check robots.txt
+        run: |
+          CODE=$(curl -sL -o /dev/null -w "%{http_code}" https://ilsanroom3.pages.dev/robots.txt)
+          [ "$CODE" = "200" ] || { echo "::error::robots.txt → $CODE"; exit 1; }
+          echo "✅ robots.txt"
+
+      - name: Check llms.txt
+        run: |
+          CODE=$(curl -sL -o /dev/null -w "%{http_code}" https://ilsanroom3.pages.dev/llms.txt)
+          [ "$CODE" = "200" ] || { echo "::error::llms.txt → $CODE"; exit 1; }
+          echo "✅ llms.txt"
+
+      - name: Check site.webmanifest
+        run: |
+          CODE=$(curl -sL -o /dev/null -w "%{http_code}" https://ilsanroom3.pages.dev/site.webmanifest)
+          [ "$CODE" = "200" ] || { echo "::error::site.webmanifest → $CODE"; exit 1; }
+          echo "✅ site.webmanifest"
+
+      - name: Check sw.js
+        run: |
+          CODE=$(curl -sL -o /dev/null -w "%{http_code}" https://ilsanroom3.pages.dev/sw.js)
+          [ "$CODE" = "200" ] || { echo "::error::sw.js → $CODE"; exit 1; }
+          echo "✅ sw.js"
+
+      - name: Verify canonical = ilsanroom3
+        run: |
+          if ! curl -sL https://ilsanroom3.pages.dev/ | grep -q 'rel="canonical" href="https://ilsanroom3.pages.dev/"'; then
+            echo "::error::canonical mismatch"
+            exit 1
+          fi
+          echo "✅ canonical = ilsanroom3"
+
+      - name: 🚨 영구 룰 — 위험 단어 0건
+        run: |
+          DANGEROUS="룸싸롱 룸살롱 노래방 유흥 밤문화 2차"
+          HTML=$(curl -sL https://ilsanroom3.pages.dev/)
+          for word in $DANGEROUS; do
+            if echo "$HTML" | grep -q "$word"; then
+              echo "::error::영구 룰 위반: $word"
+              exit 1
+            fi
+          done
+          echo "✅ 영구 룰 — 위험 단어 0건"

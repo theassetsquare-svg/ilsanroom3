@@ -1,0 +1,70 @@
+name: Lighthouse CI — Performance / A11y / SEO
+
+on:
+  schedule:
+    - cron: '30 3 * * *'  # KST 12:30
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Lighthouse CLI
+        run: npm install -g lighthouse
+
+      - name: Run Lighthouse on / (mobile)
+        run: |
+          lighthouse https://ilsanroom3.pages.dev/ \
+            --output=json --output-path=./lh-home-mobile.json \
+            --chrome-flags="--headless --no-sandbox --disable-gpu" \
+            --form-factor=mobile \
+            --only-categories=performance,accessibility,best-practices,seo || true
+
+      - name: Run Lighthouse on / (desktop)
+        run: |
+          lighthouse https://ilsanroom3.pages.dev/ \
+            --output=json --output-path=./lh-home-desktop.json \
+            --chrome-flags="--headless --no-sandbox --disable-gpu" \
+            --preset=desktop \
+            --only-categories=performance,accessibility,best-practices,seo || true
+
+      - name: Run Lighthouse on /legal/ (mobile)
+        run: |
+          lighthouse https://ilsanroom3.pages.dev/legal/ \
+            --output=json --output-path=./lh-legal-mobile.json \
+            --chrome-flags="--headless --no-sandbox --disable-gpu" \
+            --form-factor=mobile \
+            --only-categories=performance,accessibility,best-practices,seo || true
+
+      - name: Print scores
+        run: |
+          for f in lh-home-mobile.json lh-home-desktop.json lh-legal-mobile.json; do
+            if [ -f "$f" ]; then
+              echo "=== $f ==="
+              node -e "
+                const r = require('./$f');
+                const c = r.categories;
+                console.log('Performance:    ' + Math.round((c.performance?.score || 0) * 100));
+                console.log('Accessibility:  ' + Math.round((c.accessibility?.score || 0) * 100));
+                console.log('Best Practices: ' + Math.round((c['best-practices']?.score || 0) * 100));
+                console.log('SEO:            ' + Math.round((c.seo?.score || 0) * 100));
+              " || true
+            fi
+          done
+
+      - name: Upload reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-reports
+          path: lh-*.json
+          retention-days: 14

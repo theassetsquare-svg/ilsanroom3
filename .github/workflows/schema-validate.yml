@@ -1,0 +1,108 @@
+name: Schema + 영구 룰 Validate
+
+on:
+  schedule:
+    - cron: '0 4 * * *'  # KST 13:00
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  permanent-rules:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 🚨 영구 룰 — 위험 단어 차단 (Live Site)
+        run: |
+          DANGEROUS="룸싸롱 룸살롱 노래방 유흥 밤문화 2차 금영"
+          FOUND=0
+          HTML=$(curl -sL https://ilsanroom3.pages.dev/)
+          for word in $DANGEROUS; do
+            count=$(echo "$HTML" | grep -c "$word" || true)
+            if [ "$count" -gt 0 ]; then
+              echo "❌ 위험 단어 발견: $word ($count 회)"
+              FOUND=$((FOUND+1))
+            fi
+          done
+          if [ "$FOUND" -gt 0 ]; then
+            echo "::error::영구 룰 위반: 위험 단어 $FOUND 종류 발견 (방심위 위험)"
+            exit 1
+          fi
+          echo "✅ 영구 룰 통과 — 위험 단어 0건"
+
+      - name: 🚨 영구 룰 — 위험 단어 차단 (Repo files)
+        run: |
+          DANGEROUS="룸싸롱 룸살롱 노래방 유흥 밤문화"
+          FOUND=0
+          for word in $DANGEROUS; do
+            if grep -rn "$word" index.html legal/index.html llms.txt 2>/dev/null; then
+              echo "❌ 레포 파일에 위험 단어: $word"
+              FOUND=$((FOUND+1))
+            fi
+          done
+          if [ "$FOUND" -gt 0 ]; then
+            exit 1
+          fi
+          echo "✅ 레포 파일 — 위험 단어 0건"
+
+      - name: 🚨 영구 룰 — 가짜 별점 Schema 차단
+        run: |
+          # AggregateRating이 JSON-LD Schema type으로 쓰였는지 검사
+          if curl -sL https://ilsanroom3.pages.dev/ | grep -E '"@type"\s*:\s*"AggregateRating"' -q; then
+            echo "::error::AggregateRating Schema 발견 — 가짜 별점 영구 룰 위반"
+            exit 1
+          fi
+          echo "✅ 가짜 별점 Schema 0건"
+
+      - name: 🚨 영구 룰 — NightClub Schema 차단 (방심위 위험)
+        run: |
+          if curl -sL https://ilsanroom3.pages.dev/ | grep -q '"@type":\s*"NightClub"'; then
+            echo "::error::NightClub Schema 발견 — 방심위 위험"
+            exit 1
+          fi
+          echo "✅ NightClub Schema 0건"
+
+  schema-validate:
+    runs-on: ubuntu-latest
+    needs: permanent-rules
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Extract & validate JSON-LD
+        run: |
+          curl -sL https://ilsanroom3.pages.dev/ > live.html
+          node -e "
+            const fs = require('fs');
+            const html = fs.readFileSync('live.html', 'utf8');
+            const re = /<script type=\"application\/ld\+json\">([\s\S]*?)<\/script>/g;
+            const found = [];
+            let m;
+            while ((m = re.exec(html)) !== null) {
+              try {
+                const j = JSON.parse(m[1].trim());
+                const types = [];
+                if (j['@graph']) j['@graph'].forEach(g => types.push(g['@type']));
+                else if (j['@type']) types.push(j['@type']);
+                found.push(types.flat());
+                console.log('✅ Valid JSON-LD:', types.flat().join(', '));
+              } catch (e) {
+                console.error('❌ Invalid JSON-LD:', e.message);
+                process.exit(1);
+              }
+            }
+            const flat = found.flat();
+            const required = ['WebSite', 'Article', 'BreadcrumbList', 'LocalBusiness', 'FAQPage'];
+            const missing = required.filter(r => !flat.includes(r));
+            if (missing.length) {
+              console.error('❌ Missing Schema types:', missing.join(', '));
+              process.exit(1);
+            }
+            console.log('✅ All 5 required Schema types present');
+          "
