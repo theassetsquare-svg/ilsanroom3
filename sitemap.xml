@@ -5,11 +5,11 @@
   <url>
     <loc>https://ilsanroom3.pages.dev/</loc>
     <lastmod>2026-05-27</lastmod>
-    <changefreq>weekly</changefreq>
+    <changefreq>daily</changefreq>
     <priority>1.0</priority>
     <image:image>
       <image:loc>https://ilsanroom3.pages.dev/og-home.png</image:loc>
-      <image:caption>일산룸 10년 경험자가 추천하는 진짜 가이드</image:caption>
+      <image:caption>일산룸 10년차가 직접 다녀본 정발산·마두·백석 솔직 비교</image:caption>
       <image:title>일산룸 추천 가이드</image:title>
     </image:image>
   </url>
@@ -17,6 +17,6 @@
     <loc>https://ilsanroom3.pages.dev/legal/</loc>
     <lastmod>2026-05-27</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <priority>0.6</priority>
   </url>
 </urlset>

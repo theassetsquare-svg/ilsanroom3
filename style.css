@@ -254,3 +254,107 @@ details[open] .faq-question { border-bottom: 1px solid #e0e0e8; }
   .faq-answer { padding: 18px 24px; }
 }
 @media (min-width: 1200px) { .content { max-width: 900px; } }
+
+/* ===== ACCESSIBILITY: prefers-reduced-motion ===== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .countdown-bar { animation: none; }
+  .gallery-track { transition: none; }
+  .secret-section { opacity: 1; transform: none; transition: none; }
+}
+
+/* ===== ACCESSIBILITY: focus-visible (keyboard navigation) ===== */
+:focus-visible {
+  outline: 3px solid #c084fc;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+.cta-button:focus-visible, .bottom-bar-btn:focus-visible, .quiz-btn:focus-visible, .gallery-dot:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px #7c3aed;
+}
+
+/* ===== ACCESSIBILITY: skip-link for screen readers ===== */
+.skip-link {
+  position: absolute; left: -9999px; top: 0; z-index: 99999;
+  padding: 12px 20px; background: #1a1a2e; color: #fff;
+  font-weight: 700; text-decoration: none; border-radius: 0 0 8px 0;
+}
+.skip-link:focus { left: 0; }
+
+/* ===== TAP TARGETS: enforce 44px minimum (WCAG 2.5.5) ===== */
+a, button, summary, [role="button"] {
+  min-height: 44px;
+}
+.toc-list a, .faq-answer a {
+  display: inline-block;
+  padding: 2px 4px;
+  min-height: auto;
+}
+
+/* ===== READING ERGONOMICS: better mobile typography ===== */
+.article-section p {
+  font-size: 16px;
+  line-height: 1.75;
+  letter-spacing: -0.01em;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+.article-section strong {
+  color: #5b21b6;
+  font-weight: 700;
+}
+
+/* ===== CLS PREVENTION: reserve space ===== */
+.social-count { min-height: 41px; }
+.fixed-bottom-bar { will-change: transform; }
+body { content-visibility: auto; }
+.article-section { contain-intrinsic-size: auto 400px; content-visibility: auto; }
+.hero { content-visibility: visible; }
+
+/* ===== PRINT styles (SEO + accessibility) ===== */
+@media print {
+  .skeleton-screen, .exit-popup, .fixed-bottom-bar, .countdown-bar, .cta-box, .social-count { display: none !important; }
+  body { padding: 0; background: #fff; color: #000; }
+  .hero { background: #fff; min-height: auto; }
+  .hero h1, .hero-sub { color: #000; text-shadow: none; }
+  a { color: #000; text-decoration: underline; }
+  .article-photo { break-inside: avoid; }
+  .article-section { break-inside: avoid-page; padding: 20px 0; }
+}
+
+/* ===== HIGH CONTRAST: forced-colors mode (Windows) ===== */
+@media (forced-colors: active) {
+  .cta-button, .bottom-bar-primary { border: 2px solid CanvasText; }
+  .badge { border: 1px solid CanvasText; }
+}
+
+/* ===== SAFE AREA: iOS notch / Android nav bar ===== */
+.fixed-bottom-bar {
+  padding-bottom: env(safe-area-inset-bottom, 0);
+  height: calc(56px + env(safe-area-inset-bottom, 0));
+}
+body { padding-bottom: calc(56px + env(safe-area-inset-bottom, 0)); }
+@media (min-width: 768px) {
+  body { padding-bottom: calc(56px + env(safe-area-inset-bottom, 0)); }
+}
+
+/* ===== PC-ONLY: improved hover state ===== */
+@media (hover: hover) and (pointer: fine) {
+  .faq-item:hover { border-color: #7c3aed; box-shadow: 0 2px 8px rgba(124,58,237,0.1); }
+  .review-card:hover { box-shadow: 0 2px 12px rgba(0,0,0,0.06); transform: translateY(-1px); transition: all 0.2s; }
+  .check-item:hover .check-num { transform: scale(1.05); transition: transform 0.2s; }
+}
+
+/* ===== LARGE PC: optimized line length for readability ===== */
+@media (min-width: 1024px) {
+  .article-section p { max-width: 68ch; }
+  .hook-opener { max-width: none; }
+}
+

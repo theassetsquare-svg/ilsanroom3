@@ -1,0 +1,120 @@
+name: Keyword Stuffing Watchdog (24h)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '**/*.html'
+      - '.github/workflows/keyword-stuffing-watchdog.yml'
+  schedule:
+    - cron: '30 2 * * *'  # KST 11:30 (UTC+9 → UTC 02:30) — runs daily
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run keyword stuffing audit
+        id: audit
+        run: |
+          python3 << 'PY'
+          import re, sys, os, json, pathlib
+
+          PAGES = [
+              ('index.html', '일산룸', 1.5, 2.5),
+              ('legal/index.html', '합법', 0.0, 6.0),
+          ]
+
+          report = []
+          fail = False
+
+          for path, kw, lo, hi in PAGES:
+              if not os.path.exists(path):
+                  print(f'::warning::missing {path}')
+                  continue
+              html = pathlib.Path(path).read_text(encoding='utf-8')
+
+              # Extract title + meta description for duplicate-word check
+              t = re.search(r'<title>([^<]+)</title>', html)
+              title = (t.group(1) if t else '').strip()
+
+              md = re.search(r'<meta[^>]+name=["\']description["\'][^>]+content=["\']([^"\']+)["\']', html)
+              meta_desc = (md.group(1) if md else '').strip()
+
+              # Strip scripts / styles for visible text
+              v = re.sub(r'<script[\s\S]*?</script>', '', html)
+              v = re.sub(r'<style[\s\S]*?</style>', '', v)
+              v = re.sub(r'<[^>]+>', ' ', v)
+              v = re.sub(r'\s+', ' ', v).strip()
+
+              chars = len(v)
+              count = v.count(kw)
+              # Korean keyword density approximation: count * kw_length / chars
+              density = (count * len(kw)) / chars * 100 if chars else 0
+
+              # Duplicate word check in title (CLAUDE.md rule)
+              words = re.findall(r'[가-힣A-Za-z0-9]+', title)
+              dup = [w for w in set(words) if w and len(w) > 1 and words.count(w) > 1]
+
+              # H2 stuffing check: % of H2s starting with primary keyword
+              h2s = re.findall(r'<h2[^>]*>([^<]+)</h2>', html)
+              start_count = sum(1 for h in h2s if h.strip().startswith(kw))
+              h2_pct = (start_count / len(h2s) * 100) if h2s else 0
+
+              entry = {
+                  'path': path, 'keyword': kw,
+                  'chars': chars, 'count': count, 'density_pct': round(density, 2),
+                  'range': [lo, hi],
+                  'title': title, 'dup_title_words': dup,
+                  'meta_desc': meta_desc, 'h2_total': len(h2s),
+                  'h2_starting_with_kw': start_count, 'h2_kw_start_pct': round(h2_pct, 1),
+              }
+
+              issues = []
+              if density < lo or density > hi:
+                  issues.append(f'density {density:.2f}% out of [{lo},{hi}]')
+                  fail = True
+              if dup:
+                  issues.append(f'duplicate words in title: {dup}')
+                  fail = True
+              if h2_pct > 50:
+                  issues.append(f'{h2_pct:.0f}% of H2s start with "{kw}" — likely stuffing')
+                  fail = True
+              if not meta_desc:
+                  issues.append('missing meta description')
+                  fail = True
+              if not title:
+                  issues.append('missing title')
+                  fail = True
+              entry['issues'] = issues
+              report.append(entry)
+
+              print(f"\n=== {path} ===")
+              for k, val in entry.items():
+                  print(f"  {k}: {val}")
+
+          pathlib.Path('keyword-audit.json').write_text(json.dumps(report, ensure_ascii=False, indent=2))
+          print('\n=== SUMMARY ===')
+          print(json.dumps(report, ensure_ascii=False, indent=2))
+          if fail:
+              print('::error::Keyword stuffing audit FAILED — see issues above')
+              sys.exit(1)
+          PY
+
+      - name: Upload audit report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: keyword-audit-report
+          path: keyword-audit.json
+          retention-days: 30
