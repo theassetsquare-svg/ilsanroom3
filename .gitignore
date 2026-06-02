@@ -1,0 +1,13 @@
+# 보안: 서비스계정 키·시크릿 절대 커밋 금지
+*-gsc.json
+theasset-gsc.json
+*service-account*.json
+*.key
+.secrets/
+
+# 모니터/감사 산출물 (CI 아티팩트로만 보관)
+monitor-report.json
+monitor-alert.md
+keyword-audit.json
+lh-*.json
+node_modules/
