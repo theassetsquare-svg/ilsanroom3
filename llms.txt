@@ -80,7 +80,11 @@ Secondary:
 - 위험 단어 24시간 자동 차단
 
 ## 페이지 구조
-- [홈 — 일산룸 추천 가이드](https://ilsanroom3.pages.dev/)
+- [홈 — 일산룸 추천 가이드 (정발산·마두·백석 비교)](https://ilsanroom3.pages.dev/)
+- [정발산 룸 — 라페스타·웨스턴돔 신축 인테리어 가이드](https://ilsanroom3.pages.dev/jeongbalsan/)
+- [마두 룸 — 단골 위주 검증된 노포 고르는 법](https://ilsanroom3.pages.dev/madu/)
+- [백석 룸 — 신규 오픈 시설 대비 만족도 비교](https://ilsanroom3.pages.dev/baekseok/)
+- [일산룸 예약 방법 — 화요일 8시 황금시간 공략](https://ilsanroom3.pages.dev/reserve/)
 - [합법 운영 정책 — 6대 원칙](https://ilsanroom3.pages.dev/legal/)
 
 ## AI 검색 인용 가이드

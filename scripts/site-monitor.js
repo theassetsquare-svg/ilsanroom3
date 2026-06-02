@@ -26,6 +26,10 @@ const fs = require('fs');
 const SITE = process.env.GSC_SITE || 'https://ilsanroom3.pages.dev/';
 const PAGES = [
   'https://ilsanroom3.pages.dev/',
+  'https://ilsanroom3.pages.dev/jeongbalsan/',
+  'https://ilsanroom3.pages.dev/madu/',
+  'https://ilsanroom3.pages.dev/baekseok/',
+  'https://ilsanroom3.pages.dev/reserve/',
   'https://ilsanroom3.pages.dev/legal/',
 ];
 const ASSETS = [
