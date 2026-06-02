@@ -1,0 +1,84 @@
+name: SEO Monitor + Gmail Alert (자동 점검·메일)
+
+# 매일 사이트를 자동 점검하고, 문제가 있으면 theassetsquare@gmail.com 으로 메일을 보냅니다.
+# 필요한 GitHub Secrets (Settings → Secrets and variables → Actions):
+#   GSC_KEY_JSON   : Search Console 서비스계정 키 JSON 전체 (theasset-gsc)
+#   MAIL_PASSWORD  : Gmail 앱 비밀번호 16자리 (theassetsquare@gmail.com 계정)
+# MAIL_PASSWORD 없으면 메일은 건너뛰고 점검만 수행합니다(워크플로는 실패로 표시되어 GitHub 알림은 옵니다).
+
+on:
+  schedule:
+    - cron: '0 22 * * *'   # KST 07:00 (UTC 22:00) — 매일 아침 점검
+    - cron: '0 10 * * *'   # KST 19:00 (UTC 10:00) — 저녁 재점검
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/site-monitor.js'
+      - 'scripts/gsc-lib.js'
+      - '.github/workflows/seo-monitor-mailer.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run site monitor
+        id: mon
+        env:
+          GSC_KEY_JSON: ${{ secrets.GSC_KEY_JSON }}
+        run: |
+          set +e
+          node scripts/site-monitor.js
+          echo "exit_code=$?" >> "$GITHUB_OUTPUT"
+          set -e
+
+      - name: Upload report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: monitor-report
+          path: |
+            monitor-report.json
+            monitor-alert.md
+          retention-days: 30
+
+      - name: Read alert body
+        if: steps.mon.outputs.exit_code != '0'
+        id: alert
+        run: |
+          {
+            echo 'body<<EOF'
+            cat monitor-alert.md 2>/dev/null || echo "monitor-alert.md 없음 — 로그 확인 필요"
+            echo EOF
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Send Gmail alert
+        if: steps.mon.outputs.exit_code != '0' && env.MAIL_PASSWORD != ''
+        env:
+          MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          username: theassetsquare@gmail.com
+          password: ${{ secrets.MAIL_PASSWORD }}
+          from: 일산룸 모니터 <theassetsquare@gmail.com>
+          to: theassetsquare@gmail.com
+          subject: "🚨 [일산룸] 사이트 문제 발견 — 자동 점검 알림"
+          body: ${{ steps.alert.outputs.body }}
+
+      - name: Fail if problems
+        if: steps.mon.outputs.exit_code != '0'
+        run: |
+          echo "::error::사이트 점검에서 문제가 발견되었습니다. monitor-report 아티팩트를 확인하세요."
+          exit 1
