@@ -227,9 +227,9 @@ details[open] .faq-question { border-bottom: 1px solid #e0e0e8; }
   min-height: 44px; transition: background 0.15s;
 }
 .bottom-bar-btn:active { background: rgba(255,255,255,0.08); }
-.bottom-bar-primary { background: linear-gradient(135deg, #7c3aed, #9333ea); color: #fff; font-size: 15px; }
+.bottom-bar-primary { background: linear-gradient(135deg, #7c3aed, #9333ea); color: #fff; font-size: 18px; font-weight: 800; letter-spacing: 0.3px; gap: 10px; }
 .bottom-bar-primary:active { opacity: 0.9; }
-.bottom-bar-icon { font-size: 18px; }
+.bottom-bar-icon { font-size: 22px; }
 
 /* ===== FOOTER ===== */
 .footer { background: #0a0a14; color: #999; text-align: center; padding: 32px 20px 88px; font-size: 13px; line-height: 1.7; margin-top: 40px; }
