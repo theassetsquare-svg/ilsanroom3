@@ -314,8 +314,7 @@ a, button, summary, [role="button"] {
 
 /* ===== CLS PREVENTION: reserve space ===== */
 .social-count { min-height: 41px; }
-.fixed-bottom-bar { will-change: transform; }
-body { content-visibility: auto; }
+/* body에는 content-visibility 금지! contain이 position:fixed 전화바를 문서 하단으로 밀어냄(화면 고정 깨짐) */
 .article-section { contain-intrinsic-size: auto 400px; content-visibility: auto; }
 .hero { content-visibility: visible; }
 
