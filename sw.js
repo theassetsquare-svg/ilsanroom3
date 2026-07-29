@@ -1,5 +1,5 @@
-// 일산룸 추천 가이드 — Service Worker v3
-const CACHE = 'ilsanroom3-v3-2026-05-21';
+// 일산룸 추천 가이드 — Service Worker v4
+const CACHE = 'ilsanroom3-v4-2026-07-29';
 const ASSETS = [
   '/',
   '/style.css',

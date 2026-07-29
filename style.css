@@ -237,7 +237,8 @@ details[open] .faq-question { border-bottom: 1px solid #e0e0e8; }
 /* ===== RESPONSIVE — PC ===== */
 @media (min-width: 768px) {
   body { padding-bottom: 56px; }
-  .fixed-bottom-bar { max-width: 900px; left: 50%; transform: translateX(-50%); border-radius: 16px 16px 0 0; }
+  .fixed-bottom-bar { left: 0; right: 0; max-width: none; transform: none; border-radius: 0; }
+  .bottom-bar-primary { font-size: 20px; }
   .footer { padding-bottom: 32px; }
   .hero { min-height: 440px; }
   .hero-content { padding: 72px 40px 64px; }
