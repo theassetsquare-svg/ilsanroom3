@@ -10,8 +10,27 @@ ACCENT = (139, 92, 246)   # #8B5CF6
 WHITE = (255, 255, 255)
 LIGHT = (192, 132, 252)   # #c084fc
 
-FONT_BLACK = os.path.join(os.path.dirname(__file__), "NotoSansKR-Black.ttf")
-FONT_BOLD = os.path.join(os.path.dirname(__file__), "NotoSansKR-Bold.ttf")
+
+# [2026-09-22] 폰트 경로 후보 탐색 — 원래 경로를 첫 후보로 그대로 두고,
+# 없으면 저장소 안 → Windows 시스템 폰트 순으로 찾는다. 리눅스 CI 동작은 그대로다.
+import os as _os
+def _pick_font(*cands):
+    for _p in cands:
+        if _p and _os.path.exists(_p):
+            return _p
+    raise OSError("한글 폰트를 못 찾았습니다: " + ", ".join(str(c) for c in cands if c))
+_HERE = _os.path.dirname(_os.path.abspath(__file__))
+_WIN = "C:/Windows/Fonts"
+FONT_BLACK = _pick_font(
+    _os.path.join(_HERE, "NotoSansKR-Black.ttf"),
+    _WIN + "/NotoSansKR-Bold.ttf",
+    _WIN + "/malgunbd.ttf",
+)
+FONT_BOLD = _pick_font(
+    _os.path.join(_HERE, "NotoSansKR-Bold.ttf"),
+    _WIN + "/NotoSansKR-Bold.ttf",
+    _WIN + "/malgunbd.ttf",
+)
 
 def make_font(path, size):
     return ImageFont.truetype(path, size)
@@ -51,7 +70,7 @@ def generate_og(main_text, sub_text, output_path):
     # Decorative diamond accent in center-top
     draw.polygon([(W//2 - 20, 180), (W//2, 160), (W//2 + 20, 180), (W//2, 200)], fill=ACCENT)
 
-    # --- Main text (신실장) — HUGE, centered ---
+    # --- Main text (일산룸 총책임자) — HUGE, centered ---
     max_w = int(W * 0.8)
     main_font, main_size = fit_font(draw, main_text, FONT_BLACK, max_w, start_size=400)
     mw = text_width(draw, main_text, main_font)
@@ -94,7 +113,7 @@ def generate_og(main_text, sub_text, output_path):
 
 if __name__ == "__main__":
     generate_og(
-        main_text="신실장",
+        main_text="일산룸 총책임자",
         sub_text="일산명월관",
         output_path=os.path.join(os.path.dirname(__file__), "og-home.png")
     )
