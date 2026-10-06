@@ -1,11 +1,11 @@
 // 일산룸 추천 가이드 — Service Worker v6
-const CACHE = 'ilsanroom3-v6-2026-07-29';
+const CACHE = 'ilsanroom3-v6-2026-10-06';
 const ASSETS = [
   '/',
   '/style.css?v=6',
   '/main.js',
   '/favicon.ico',
-  '/og-home.png',
+  '/card-home-2574472e.png',
   '/site.webmanifest',
   '/legal/'
 ];

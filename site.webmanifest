@@ -17,7 +17,6 @@
     { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
   ],
   "shortcuts": [
-    { "name": "신실장 전화", "short_name": "전화", "url": "/?action=call", "description": "신실장 010-3695-4929 즉시 연결" },
     { "name": "정발산 권역", "short_name": "정발산", "url": "/#section-area", "description": "정발산권 일산룸 정보" },
     { "name": "마두 권역", "short_name": "마두", "url": "/#section-area", "description": "마두권 일산룸 정보" },
     { "name": "체크리스트", "short_name": "체크", "url": "/#section-checklist", "description": "일산룸 고를 때 5가지 체크" }

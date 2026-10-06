@@ -70,7 +70,7 @@ def generate_og(main_text, sub_text, output_path):
     # Decorative diamond accent in center-top
     draw.polygon([(W//2 - 20, 180), (W//2, 160), (W//2 + 20, 180), (W//2, 200)], fill=ACCENT)
 
-    # --- Main text (일산룸 총책임자) — HUGE, centered ---
+    # --- Main text — HUGE, centered ---
     max_w = int(W * 0.8)
     main_font, main_size = fit_font(draw, main_text, FONT_BLACK, max_w, start_size=400)
     mw = text_width(draw, main_text, main_font)
@@ -113,7 +113,7 @@ def generate_og(main_text, sub_text, output_path):
 
 if __name__ == "__main__":
     generate_og(
-        main_text="일산룸 총책임자",
+        main_text="광고문의",
         sub_text="일산명월관",
         output_path=os.path.join(os.path.dirname(__file__), "og-home.png")
     )
